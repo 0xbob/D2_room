@@ -1,5 +1,5 @@
-import Assets from "../Assets";
-import Map from "../Map";
+import Assets from "../assets";
+import Map from "../map";
 
 const 	toIsometric = (x, y) => {
 
