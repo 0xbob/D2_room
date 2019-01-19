@@ -1,3 +1,6 @@
+import { 
+	ASSETS_URL 
+} from "../constants";
 
 const 	toJSON = response =>
 	response.json();
@@ -9,14 +12,12 @@ export default class Assets {
 			.then(toJSON);
 	}
 
-	static loadImage(src, onload){
-		const image = new Image();
+	static loadImage(src){
+		return new Promise((success, reject) =>
+			const image = new Image();
 
-		image.onload = () => onload(image);
-		image.src = src;
-	}
-
-	static loadAvatar(look){
-
-	}
+			image.onload = () => success(image);
+			image.src = src;
+		});
+	}	
 }

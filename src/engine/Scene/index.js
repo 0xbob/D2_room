@@ -9,13 +9,20 @@ const 	toIsometric = (x, y) => {
 
 export default class Scene {
 
-
-	static loadActor(){
-	
+	constructor()
+	{
+		this.animations = animations || [];
 	}
 
-	static render(){
-		
-		context.drawImage(Scene.background, 0, 0);
+	// Change sprite state
+
+	addAnimation(animation)
+	{
+		this.animations.push(animation);
+	}
+	
+	removeAnimation(id))
+	{
+		this.animations = this.animations.filter(animation => animation.id != id);
 	}
 }

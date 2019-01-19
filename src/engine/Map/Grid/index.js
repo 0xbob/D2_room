@@ -1,6 +1,13 @@
+
+const 	WALKABE = 1;	
+const	OBSTACLE = 2;
+const 	OCCUPIED = 3;
+
 export default class Grid {
 
-	static init(cells){
-		Grid.cells = cells || [];
+	constructor(cells)
+	{
+		this.cells = cells || [];
 	}
+	
 }
