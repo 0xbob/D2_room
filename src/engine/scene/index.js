@@ -2,9 +2,31 @@ import Assets from "../assets";
 import Map from "../map";
 
 
+const 	loadGFX = () => {
+	const image = await download();
+	return {};
+}
+
+const 	loadBackground = async (background) =>
+	await download();
+
+const 	loadActor = async actor => {
+	const image = await download();
+	const { x, y } = actor;
+
+	return { image, x, y };
+}
+
+const	loadAnimation = async animation => {
+	const image = await download();
+	const { x, y } = animation;
+	
+	return { image, x, y };
+}
+
 const 	sortGraphics = (previous, next) => {
-	const diffY = previous.y - next.y;
-	const diffX = previous.x - next.x;
+	const diffY = previous["y"] - next["y"];
+	const diffX = previous["x"] - next["x"];
 
 	if (diffY) return (diffY > 0 ? 1 : 0);
 	if (diffX) return (diffX > 0 ? 1 : 0);
@@ -27,7 +49,7 @@ export default class Scene {
 	}
 	
 	static async loadGraphics() {
-
+		const actors = await Promise.all(map.actors);
 	}
 	
 	static render() {
