@@ -12,13 +12,23 @@ exports.OCCUPIED = OCCUPIED;
 
 export default class Grid {
 
-	static initialize(cells)
-	{
+	static initialize(cells) {
 		Grid.cells = cells || [];
 	}
+
+	static getNeighbors(cellID) {
+		const coordinates = Grid.getCoordinatesFromCellID(cellID);
+
+		const neighbors = Grid.cells.filter(({ x, y }) => {
+			const diffX = coordinates.x - x;
+			const diffY = coordinates.y - y;
+
+			return false;
+		});
+		return neighbors;
+	}
 	
-	static getCellIDFromCoordinates({ x, y }))
-	{
+	static getCellIDFromCoordinates({ x, y }) {
 		return ((GRID_COLS * y) + x); 
 	}
 
