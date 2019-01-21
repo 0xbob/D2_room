@@ -7,12 +7,12 @@ const 	toJSON = response =>
 
 export default class Assets {
 
-	static loadJSON(url){
+	static downloadJSON(url){
 		return fetch(url)
 			.then(toJSON);
 	}
 
-	static loadImage(src){
+	static downloadImage(src){
 		return new Promise((success, reject) =>
 			const image = new Image();
 

@@ -12,7 +12,7 @@ exports.OCCUPIED = OCCUPIED;
 
 export default class Grid {
 
-	static init(cells)
+	static initialize(cells)
 	{
 		Grid.cells = cells || [];
 	}
@@ -24,8 +24,8 @@ export default class Grid {
 
 	static getCoordinatesFromCellID(cellID)
 	{
-		const y = parseInt(cellID / 13);
-		const x = cellID % 13;
+		const y = parseInt(cellID / GRID_COLS);
+		const x = cellID % GRID_COLS;
 
 		return { x, y };
 	}
