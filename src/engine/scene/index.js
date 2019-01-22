@@ -1,28 +1,6 @@
 import Assets from "../assets";
 import Map from "../map";
-
-
-const 	loadGFX = () => {
-	const image = await download();
-	return {};
-}
-
-const 	loadBackground = async (background) =>
-	await download();
-
-const 	loadActor = async actor => {
-	const image = await download();
-	const { x, y } = actor;
-
-	return { image, x, y };
-}
-
-const	loadAnimation = async animation => {
-	const image = await download();
-	const { x, y } = animation;
-	
-	return { image, x, y };
-}
+import Screen from "../screen";
 
 const 	sortGraphics = (previous, next) => {
 	const diffY = previous["y"] - next["y"];
@@ -32,9 +10,26 @@ const 	sortGraphics = (previous, next) => {
 	if (diffX) return (diffX > 0 ? 1 : 0);
 	return (0);
 }
+	
+const 	loadGraphics = async (items, handler) => {
+
+	const	graphics = [];
+	const 	images = await Promise.all(items.map(handler));
+
+	for (const index in items) {
+		const image = images[index];
+		const { x, y } = items[index];
+
+		graphics.push({ image, x, y });
+	}
+	return graphics;
+}
 
 export default class Scene {
 
+	static initialize(context) {
+		Scene.context = context;
+	}
 	
 	static load(animations) {
 		Scene.animations = animations || [];
@@ -44,16 +39,20 @@ export default class Scene {
 		Scene.animations.push(animation);
 	}
 	
-	static removeAnimation(id)) {
-		Scene.animations = Scene.animations.filter(animation => animation.id != id);
+	static removeAnimation(id) {
+		Scene.animations = Scene.animations
+			.filter(animation => animation.id != id);
 	}
-	
-	static async loadGraphics() {
-		const actors = await Promise.all(map.actors);
-	}
-	
-	static render() {
-		Map.graphics = Map.graphics.sort(sortGraphics);
+
+	static async render() {
+
+		const actors = await loadGraphics(Map.actors, Assets.downloadActor);
+		const gfx = await loadGraphics(Map.gfx, Assets.downloadGFX);
+
+		Map.graphics = [...gfx, ...actors]
+			.sort(sortGraphics);
+		for (const { image, x, y } of Map.graphics)
+			Scene.context.drawImage(image, x, y); 
 	}
 }
 

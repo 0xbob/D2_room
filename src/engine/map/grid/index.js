@@ -1,6 +1,6 @@
 import 	{ 
 	GRID_COLS
-}	from "../constants";
+}	from "../../constants";
 
 const 	WALKABLE = 1;	
 const	OBSTACLE = 2;
